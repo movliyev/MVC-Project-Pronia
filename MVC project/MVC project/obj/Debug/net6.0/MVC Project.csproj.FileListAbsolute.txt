@@ -1,0 +1,56 @@
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\appsettings.json
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\MVC Project.exe
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\MVC Project.deps.json
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\MVC Project.runtimeconfig.json
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\MVC Project.dll
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\MVC Project.pdb
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.AssemblyInfoInputs.cache
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.AssemblyInfo.cs
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.csproj.CoreCompileInputs.cache
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.RazorAssemblyInfo.cache
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.RazorAssemblyInfo.cs
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.MVC Project.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.build.MVC Project.props
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.MVC Project.props
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.MVC Project.props
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\scopedcss\bundle\MVC Project.styles.css
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.dll
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\refint\MVC Project.dll
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.pdb
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\MVC Project.genruntimeconfig.cache
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\obj\Debug\net6.0\ref\MVC Project.dll
+C:\Users\helpdesk_connect\Downloads\MVC Project\MVC Project\bin\Debug\net6.0\MVC Project.staticwebassets.runtime.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\appsettings.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\MVC Project.staticwebassets.runtime.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\MVC Project.exe
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\MVC Project.deps.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\MVC Project.runtimeconfig.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\MVC Project.dll
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\bin\Debug\net6.0\MVC Project.pdb
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.AssemblyInfoInputs.cache
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.AssemblyInfo.cs
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.csproj.CoreCompileInputs.cache
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.RazorAssemblyInfo.cache
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.RazorAssemblyInfo.cs
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.MVC Project.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.build.MVC Project.props
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.MVC Project.props
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.MVC Project.props
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\scopedcss\bundle\MVC Project.styles.css
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.dll
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\refint\MVC Project.dll
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.pdb
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\MVC Project.genruntimeconfig.cache
+C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\obj\Debug\net6.0\ref\MVC Project.dll
