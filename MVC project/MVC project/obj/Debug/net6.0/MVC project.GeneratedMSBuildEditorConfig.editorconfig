@@ -9,25 +9,25 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MVC_Project
 build_property.RootNamespace = MVC_Project
-build_property.ProjectDir = C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project\
+build_property.ProjectDir = C:\Users\helpdesk_connect\Desktop\MVC project Pronia\MVC project\MVC Project\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\helpdesk_connect\Desktop\MVC project\MVC Project
+build_property.MSBuildProjectDirectory = C:\Users\helpdesk_connect\Desktop\MVC project Pronia\MVC project\MVC Project
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/helpdesk_connect/Desktop/MVC project/MVC Project/Views/Home/About.cshtml]
+[C:/Users/helpdesk_connect/Desktop/MVC project Pronia/MVC project/MVC Project/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/helpdesk_connect/Desktop/MVC project/MVC Project/Views/Home/Index.cshtml]
+[C:/Users/helpdesk_connect/Desktop/MVC project Pronia/MVC project/MVC Project/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/helpdesk_connect/Desktop/MVC project/MVC Project/Views/Shared/_Layout.cshtml]
+[C:/Users/helpdesk_connect/Desktop/MVC project Pronia/MVC project/MVC Project/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/helpdesk_connect/Desktop/MVC project/MVC Project/Views/_ViewStart.cshtml]
+[C:/Users/helpdesk_connect/Desktop/MVC project Pronia/MVC project/MVC Project/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
