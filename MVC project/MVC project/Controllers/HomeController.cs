@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVC_Project.DAL;
 using MVC_Project.Models;
 using MVC_Project.ViewModels;
@@ -18,16 +19,17 @@ namespace MVC_Project.Controllers
         {
             //_context.Slides.AddRange(slides);  
             //_context.SaveChanges(); 
-            List<Slide> slides= _context.Slides.OrderBy(s=>s.Order).Take(2).ToList();
-            List<Product> products = _context.Products.ToList();
-            //List<Product> latest = _context.Products.OrderByDescending(x => x.Order).Take(8).ToList();
+            List<Slide> slides= _context.Slides.OrderBy(s => s.Order).Take(3).ToList();
+            List<Product> products = _context.Products.Include(p=>p.ProductImages).ToList();
+          
 
             HomeVM home = new HomeVM
             {
                 Slides = slides,
                 Products = products,
-                LatestsSliders= _context.Products.OrderByDescending(x => x.Order).Take(8).ToList()
-        };
+                LatestsSliders= _context.Slides.OrderByDescending(x => x.Order).Take(3).ToList()
+
+            };
 
             return View(home);
         }

@@ -1,5 +1,6 @@
-﻿@using MVC_Project.Models;
-@using MVC_Project.ViewModels;
+﻿@using MVC_Project.ViewModels;
+@using MVC_Project.Models;
+
 
 @model HomeVM
       <!-- Begin Slider Area -->
@@ -1498,7 +1499,7 @@
                   aria-labelledby="latest-tab"
                 >
                   <div class="product-item-wrap row">
-                   @foreach (Product item in Model.LatestsSliders)
+                   @foreach (Slide item in Model.LatestsSliders)
                    {
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
@@ -1552,7 +1553,7 @@
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <a class="product-name" href="shop.html">@item.Name</a>
+                                            <a class="product-name" href="shop.html">@item.Title</a>
                                             <div class="price-box pb-1">
                                                 <span class="new-price">$@item.Price</span>
                                             </div>
@@ -1700,10 +1701,10 @@
                                 <div class="product-img">
                                     <a href="shop.html">
                                         <img class="primary-img"
-                                             src="~/assets/images/website-images//@product.Image"
+                                             src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true).Url"
                                              alt="Product Images" />
                                         <img class="secondary-img"
-                                             src="~/assets/images/website-images//1-10-270x300.jpg"
+                                             src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==false).Url"
                                              alt="Product Images" />
                                     </a>
                                     <div class="product-add-action">

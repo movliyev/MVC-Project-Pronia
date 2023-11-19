@@ -5,25 +5,25 @@
 namespace MVC_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class addOrder : Migration
+    public partial class TableSlideAddColumbPrice : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Order",
-                table: "Products",
-                type: "int",
+            migrationBuilder.AddColumn<decimal>(
+                name: "Price",
+                table: "Slides",
+                type: "decimal(18,2)",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0m);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Order",
-                table: "Products");
+                name: "Price",
+                table: "Slides");
         }
     }
 }
