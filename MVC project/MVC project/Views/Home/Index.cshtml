@@ -1,7 +1,5 @@
-﻿@using MVC_Project.ViewModels;
-@using MVC_Project.Models;
-
-
+﻿@using MVC_Project.Models;
+@using MVC_Project.ViewModels;
 @model HomeVM
       <!-- Begin Slider Area -->
       <div class="slider-area">
@@ -1699,7 +1697,7 @@
 
                             <div class="swiper-slide product-item">
                                 <div class="product-img">
-                                    <a href="shop.html">
+                                    <a href="product/detail/@product.Id">
                                         <img class="primary-img"
                                              src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true).Url"
                                              alt="Product Images" />

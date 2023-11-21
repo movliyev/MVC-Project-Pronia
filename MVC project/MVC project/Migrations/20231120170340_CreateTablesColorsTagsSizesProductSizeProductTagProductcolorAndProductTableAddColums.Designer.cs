@@ -4,6 +4,7 @@ using MVC_Project.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231120170340_CreateTablesColorsTagsSizesProductSizeProductTagProductcolorAndProductTableAddColums")]
+    partial class CreateTablesColorsTagsSizesProductSizeProductTagProductcolorAndProductTableAddColums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +39,7 @@ namespace MVC_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorys", (string)null);
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Color", b =>
@@ -53,7 +56,7 @@ namespace MVC_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors", (string)null);
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Product", b =>
@@ -86,7 +89,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductColor", b =>
@@ -109,7 +112,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductColors", (string)null);
+                    b.ToTable("ProductColors");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductImage", b =>
@@ -134,7 +137,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductSize", b =>
@@ -157,7 +160,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("SizeId");
 
-                    b.ToTable("ProductSizes", (string)null);
+                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductTag", b =>
@@ -180,7 +183,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("ProductTags", (string)null);
+                    b.ToTable("ProductTags");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Size", b =>
@@ -197,7 +200,7 @@ namespace MVC_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes", (string)null);
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Slide", b =>
@@ -232,7 +235,7 @@ namespace MVC_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Slides", (string)null);
+                    b.ToTable("Slides");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Tag", b =>
@@ -249,7 +252,7 @@ namespace MVC_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Product", b =>

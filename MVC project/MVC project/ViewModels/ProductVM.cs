@@ -10,6 +10,9 @@ namespace MVC_Project.ViewModels
         public List<ProductImage> ProductImages { get; set; }
         public Category Category { get; set; }
         public Product Product { get; set; }
+        public List<Color> Colors { get; set;}
+        public List<Size> Sizes { get; set; }
+
 
 
     }
