@@ -15,12 +15,12 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async  Task <IActionResult> Index()
         {
             //_context.Slides.AddRange(slides);  
             //_context.SaveChanges(); 
-            List<Slide> slides= _context.Slides.OrderBy(s => s.Order).Take(3).ToList();
-            List<Product> products = _context.Products.Include(p=>p.ProductImages).ToList();
+            List<Slide> slides= await _context.Slides.OrderBy(s => s.Order).Take(3).ToListAsync();
+            List<Product> products = _context.Products.Include(p=>p.ProductImages.Where(p=>p.IsPrimary!=null) ).ToList();
           
 
             HomeVM home = new HomeVM

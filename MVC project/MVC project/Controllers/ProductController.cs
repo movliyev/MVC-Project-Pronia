@@ -18,24 +18,26 @@ namespace MVC_Project.Controllers
         //{
         //    return View();
         //}
-        public IActionResult Detail(int id)
+        public async Task <IActionResult> Detail(int id)
         {
             if (id == 0) return BadRequest();
 
             List<Product> products = _context.Products.Include(p => p.ProductImages).ToList();
-            Product product=_context.Products
+            Product product= await _context.Products
                 .Include(p=>p.Category)
                 .Include(p=>p.ProductImages)
                 .Include(p=>p.ProductTags).ThenInclude(x=>x.Tag)
                 .Include(p => p.ProductColors).ThenInclude(x => x.Color)
                 .Include(p => p.ProductSizes).ThenInclude(x => x.Size)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (product == null) return NotFound();
-            List<Product> releatedProducts = _context.Products.Include(p => p.ProductImages).Include(p => p.Category).Where(p => p.CategoryId == product.CategoryId && p.Id != id).ToList();
+            List<Product> releatedProducts = _context.Products.Include(p => p.ProductImages)
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId == product.CategoryId && p.Id != id).ToList();
 
-            List<ProductImage> pi = _context.ProductImages.ToList();
-            List<Color> colors = _context.Colors.ToList();
-            List<Size> sizes = _context.Sizes.ToList();
+            List<ProductImage> pi = await _context.ProductImages.ToListAsync();
+            List<Color> colors = await _context.Colors.ToListAsync();
+            List<Size> sizes = await _context.Sizes.ToListAsync();
 
             ProductVM productVM = new ProductVM
             {
