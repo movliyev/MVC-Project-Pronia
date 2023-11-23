@@ -49,9 +49,9 @@
                                                @item.Products.Count
                                             </td>
                                             <td>
-                                                <a class="btn btn-warning btn-info"><i class ="mdi mdi-grease-pencil"></i></a>
-                                                <a class="btn btn-danger btn-info"><i class="mdi mdi-delete"></i></a>
-                                                <a class="btn btn-primary "><i class="mdi mdi-open-in-new"></i></a>
+                                                <a asp-action="Update" asp-controller="Category" asp-route-id="@item.Id" class="btn btn-warning btn-info"><i class ="mdi mdi-grease-pencil"></i></a>
+                                                <a asp-action="Delete" asp-controller="Category" asp-route-id="@item.Id" class="btn btn-danger btn-info"><i class="mdi mdi-delete"></i></a>
+                                                <a asp-action="Detail" asp-controller="Category" asp-route-id="@item.Id" class="btn btn-primary "><i class="mdi mdi-open-in-new"></i></a>
                                             </td>
                                         </tr>
 

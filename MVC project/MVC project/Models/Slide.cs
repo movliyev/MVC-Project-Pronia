@@ -1,4 +1,6 @@
-﻿namespace MVC_Project.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MVC_Project.Models
 {
     public class Slide
     {
@@ -9,6 +11,9 @@
         public string Image { get; set; }
         public decimal Price { get; set; }
         public int Order { get; set; }
+        [NotMapped]
+        public IFormFile Photo { get; set; }
+
 
     }
 }

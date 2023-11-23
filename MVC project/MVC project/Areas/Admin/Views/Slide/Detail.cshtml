@@ -1,0 +1,26 @@
+﻿@model List<Slide>
+
+
+
+@foreach (Slide item in Model)
+{
+    <div class=" col-3 row">
+        <div class="card" style="width: 18rem;">
+            <img src="~/assets/images/slider/@item.Image" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Title:@item.Title</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">SubTitle:@item.Subtitle</li>
+                    <li class="list-group-item">Order:@item.Order</li>
+                    <p class="card-text">Description:@item.Description</p>
+                </ul>
+            </div>
+           
+           
+           
+        </div>
+        <br>
+    </div>
+    
+
+}

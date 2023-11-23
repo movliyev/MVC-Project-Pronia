@@ -42,5 +42,59 @@ namespace MVC_Project.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));   
         }
+
+
+        //UPDATE 
+        public async Task<IActionResult>Update(int id)
+        {
+            if (id<= 0) return BadRequest();
+            Category category=await _context.Categorys.FirstOrDefaultAsync(c=>c.Id==id);
+            if (category == null) return NotFound();
+            return View(category);
+        }
+        [HttpPost]
+        public async Task<IActionResult>Update(int id,Category category)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            Category exsisted = await _context.Categorys.FirstOrDefaultAsync(c => c.Id == id);
+            if(exsisted == null) return NotFound(); 
+            bool result=await _context.Categorys.AnyAsync(c=>c.Name==category.Name&&c.Id!=id);
+            if (result)
+            {
+                ModelState.AddModelError("Name", "Bu adda category atriq movcuddur");
+
+                return View();
+            }
+            exsisted.Name = category.Name;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));  
+        }
+
+
+        //DELETE
+
+        public async Task<IActionResult> Delete(int id)
+        { 
+            if(id<=0) return BadRequest(); 
+
+            Category existed= await _context.Categorys.FirstOrDefaultAsync(c=>c.Id==id);
+
+            if (existed is null) return NotFound();
+            _context.Categorys.Remove(existed);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index)); 
+        }
+
+        //detail
+        public async Task<IActionResult> Detail()
+        {
+            List<Category> categories = await _context.Categorys.Include(c => c.Products).ToListAsync();
+            return View(categories);
+        }
+
+
     }
 }

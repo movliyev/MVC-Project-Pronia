@@ -1,0 +1,35 @@
+﻿@model List<Category>
+
+@{
+    int count = 0;
+}
+
+@foreach (Category item in Model)
+{
+    count++;
+   
+   
+  <div class="row">
+  <div class="col-sm-3 mb-3 mb-sm-0">
+    <div class=" card">
+      <div class="card-body">
+                    <div class=" col-3 card" style="width: 18rem;">
+                        <div class="card-header">
+                            Product Name:@item.Name
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">No:@count</li>
+                            <li class="list-group-item">Products Count:@item.Products.Count</li>
+
+                        </ul>
+                    </div>
+        
+      </div>
+    </div>
+   </div>
+  </div>
+  <br>
+}
+
+
+

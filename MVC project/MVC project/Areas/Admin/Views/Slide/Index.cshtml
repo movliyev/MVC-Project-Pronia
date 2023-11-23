@@ -1,6 +1,6 @@
 ﻿@using MVC_Project.Models;
 @using MVC_Project.ViewModels;
-@model List<Tag>
+@model List<Slide>
 @{
     int count = 0;
 }
@@ -11,8 +11,8 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tag Table</h4>
-                        <a asp-controller="Tag" asp-action="Create" class="btn btn-success">Create Tag</a>
+                        <h4 class="card-title">Slide Table</h4>
+                        <a asp-controller="Slide" asp-action="Create" class="btn btn-success">Create Slide </a>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
@@ -21,10 +21,13 @@
                                             No
                                         </th>
                                         <th>
-                                            Name
+                                            Image
                                         </th>
                                         <th>
-                                            Products Count
+                                            Title
+                                        </th>
+                                        <th>
+                                            Order
                                         </th>
                                         <th>
 
@@ -34,7 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Tag item in Model)
+                                    @foreach (Slide item in Model)
                                     {
                                         count++;
                                         <tr>
@@ -43,15 +46,18 @@
                                             </td>
 
                                             <td>
-                                                @item.Name
+                                                <img style="width:150px;height:150px;" src="~/assets/images/slider/@item.Image"/>
                                             </td>
                                             <td>
-                                                @item.ProductTags.Count
+                                                @item.Title
                                             </td>
                                             <td>
-                                                <a asp-action="Update" asp-controller="Tag" asp-route-id="@item.Id" class="btn btn-warning btn-info"><i class="mdi mdi-grease-pencil"></i></a>
-                                                <a asp-action="Delete" asp-controller="Tag" asp-route-id="@item.Id" class="btn btn-danger btn-info"><i class="mdi mdi-delete"></i></a>
-                                                <a class="btn btn-primary "><i class="mdi mdi-open-in-new"></i></a>
+                                                @item.Order
+                                            </td>
+                                            <td>
+                                                <a  class="btn btn-warning btn-info"><i class="mdi mdi-grease-pencil"></i></a>
+                                                <a  class="btn btn-danger btn-info"><i class="mdi mdi-delete"></i></a>
+                                                <a asp-action="Detail" asp-controller="Slide" asp-route-id="@item.Id" class="btn btn-primary "><i class="mdi mdi-open-in-new"></i></a>
                                             </td>
                                         </tr>
 
@@ -66,4 +72,3 @@
         </div>
     </div>
 </div>
-
