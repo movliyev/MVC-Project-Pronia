@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kM4uZyHORqvqIJMiC5JbV17BVHgD92kFWLnAU5OWCKg=",
+  "Hash": "hzxY8SAYRBnXB+QS0YFWETMwnYTjuCq0ME0woAoAfcw=",
   "Source": "MVC Project",
   "BasePath": "_content/MVC Project",
   "Mode": "Default",
@@ -3247,6 +3247,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\3img.jpg"
     },
     {
+      "Identity": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\images\\slider\\49a9c168-49da-4226-af0f-a626dc30cbd21img.jpg",
+      "SourceId": "MVC Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\wwwroot\\",
+      "BasePath": "_content/MVC Project",
+      "RelativePath": "assets/images/slider/49a9c168-49da-4226-af0f-a626dc30cbd21img.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\49a9c168-49da-4226-af0f-a626dc30cbd21img.jpg"
+    },
+    {
       "Identity": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\images\\slider\\4img.jpg",
       "SourceId": "MVC Project",
       "SourceType": "Discovered",
@@ -3264,12 +3281,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\4img.jpg"
     },
     {
-      "Identity": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\images\\slider\\Adsız.png",
+      "Identity": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\images\\slider\\a2d4b6b7-f54d-41f3-9133-233750baee5f4img.jpg",
       "SourceId": "MVC Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\wwwroot\\",
       "BasePath": "_content/MVC Project",
-      "RelativePath": "assets/images/slider/Adsız.png",
+      "RelativePath": "assets/images/slider/a2d4b6b7-f54d-41f3-9133-233750baee5f4img.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -3278,7 +3295,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\Adsız.png"
+      "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\a2d4b6b7-f54d-41f3-9133-233750baee5f4img.jpg"
     },
     {
       "Identity": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\images\\slider\\bg\\1-1.jpg",

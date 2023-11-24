@@ -89,10 +89,26 @@ namespace MVC_Project.Areas.Admin.Controllers
         }
 
         //detail
-        public async Task<IActionResult> Detail()
+        public async Task<IActionResult> Detail(int id)
         {
-            List<Category> categories = await _context.Categorys.Include(c => c.Products).ToListAsync();
-            return View(categories);
+            if (id < 0) return BadRequest();
+
+            Category category = await _context.Categorys
+                .Include(p => p.Products)
+                .ThenInclude(p=>p.ProductImages)
+                .Include(x=>x.Products).ThenInclude(x=>x.ProductTags)
+                .ThenInclude(x=>x.Tag)
+                .Include(p=>p.Products)
+                .ThenInclude(p=>p.ProductSizes).ThenInclude(pi=>pi.Size)
+                 .Include(p => p.Products)
+                .ThenInclude(p => p.ProductColors).ThenInclude(pi => pi.Color)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+
+            if (category == null) return NotFound();
+
+
+            return View(category);
         }
 
 

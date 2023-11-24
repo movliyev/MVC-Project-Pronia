@@ -1,35 +1,50 @@
-﻿@model List<Category>
+﻿@model Category
 
-@{
-    int count = 0;
-}
 
-@foreach (Category item in Model)
-{
-    count++;
    
-   
-  <div class="row">
-  <div class="col-sm-3 mb-3 mb-sm-0">
+  
     <div class=" card">
       <div class="card-body">
                     <div class=" col-3 card" style="width: 18rem;">
                         <div class="card-header">
-                            Product Name:@item.Name
+                            Category Name:@Model.Name
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">No:@count</li>
-                            <li class="list-group-item">Products Count:@item.Products.Count</li>
+                            <li class="list-group-item">Id:@Model.Id</li>
+                            <li class="list-group-item">Products Count:@Model.Products.Count</li>
+                @foreach (var item in Model.Products)
+                {
+                    <div class="card" style="width: 18rem;">
+                        <img src="~/assets/images/website-images/@item.ProductImages.FirstOrDefault(p=>p.IsPrimary==true).Url" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">:Name:@item.Name</h5>
+                            <p class="card-text">:Description:@item.Description</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Color:@item.ProductColors.FirstOrDefault(p=>p.ProductId==item.Id).Color.Name</li>
+                            <li class="list-group-item">Size:@item.ProductSizes.FirstOrDefault(p=>p.ProductId==item.Id).Size.Name</li>
+                            <li class="list-group-item">Tag:@item.ProductTags.FirstOrDefault(p=>p.ProductId==item.Id).Tag.Name</li>
+                            <li class="list-group-item">SKU:@item.SKU</li>
+                            <li class="list-group-item">:Price:@item.Price</li>
+                            <a class="nav-link" asp-controller="Category" asp-action="Index">Back</a>
+                        </ul>
 
+                    </div>
+
+
+                }
+          
                         </ul>
                     </div>
         
       </div>
     </div>
    </div>
-  </div>
-  <br>
-}
+
+
+
+
+
 
 
 
