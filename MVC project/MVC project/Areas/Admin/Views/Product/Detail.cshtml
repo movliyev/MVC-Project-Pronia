@@ -1,0 +1,126 @@
+﻿@model Product
+
+<div class="single-product-area section-space-top-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="single-product-img">
+                    <div class="swiper-container single-product-slider">
+                        <div class="swiper-wrapper">
+                            @foreach (ProductImage item in Model.ProductImages.FindAll(x => x.IsPrimary == true))
+                            {
+                                <div class="swiper-slide">
+
+                                    <a href="~/assets/images/website-images/@item.Url"
+                                       class="single-img gallery-popup">
+                                        <img class="img-full"
+                                             src="~/assets/images/website-images/@item.Url"
+                                             alt="Product Image" />
+                                    </a>
+                                </div>
+                            }
+
+                            @foreach (ProductImage item in Model.ProductImages.FindAll(x => x.IsPrimary == false))
+                            {
+
+                                <div class="swiper-slide">
+                                    <a href="~/assets/images/website-images/@item.Url"
+                                       class="single-img gallery-popup">
+                                        <img class="img-full"
+                                             src="~/assets/images/website-images/@item.Url"
+                                             alt="Product Image" />
+                                    </a>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="thumbs-arrow-holder">
+                        <div class="swiper-container single-product-thumbs">
+                            <div class="swiper-wrapper">
+                                @foreach (ProductImage item in Model.ProductImages.FindAll(x => x.IsPrimary == null))
+                                {
+                                    <a href="#" class="swiper-slide">
+                                        <img class="img-full"
+                                             src="~/assets/images/website-images/@item.Url"
+                                             alt="Product Thumnail" />
+                                    </a>
+
+                                }
+
+                            </div>
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 pt-5 pt-lg-0">
+                <div class="single-product-content">
+                    <h2 class="title">Product NAME :@Model.Name</h2>
+                    <div class="price-box">
+                        <span class="new-price">PRICE:@Model.Price</span>
+                    </div>
+                   
+                    <div class="selector-wrap color-option">
+                        <span class="selector-title border-bottom-0">Color</span>
+                        <select class="nice-select wide border-bottom-0 rounded-0">
+                           
+                          
+                            @foreach (var item in Model.ProductColors)
+                            {
+                               
+                                <option value="default">@item.Color.Name </option>
+                            }
+                          
+
+                        </select>
+                    </div>
+                    <div class="selector-wrap size-option">
+                        <span class="selector-title">Size</span>
+                        <select class="nice-select wide rounded-0">
+
+                            @foreach (var item in Model.ProductSizes)
+                            {
+                               
+                                <option value="medium">@item.Size.Name </option>
+                            }
+                           
+
+
+                        </select>
+                    </div>
+                    <p class="short-desc">
+                       DESCRIPTION: @Model.Description
+                    </p>
+                    
+                   
+                    <div class="product-category">
+                        <span class="title">SKU:</span>
+                       
+                                <a href="#">@Model.SKU</a>
+                           
+                    </div>
+                    <div class="product-category">
+                        <span class="title">Category :</span>
+                       
+                                <a href="#">@Model.Category.Name</a>
+                           
+                    </div>
+                    <div class="product-category product-tags">
+                        <span class="title">Tags :   </span>
+                      
+                                @foreach (var item in Model.ProductTags)
+                                {
+                                   
+                                    <a href="#">@item.Tag.Name, </a>
+                                }
+                           
+
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

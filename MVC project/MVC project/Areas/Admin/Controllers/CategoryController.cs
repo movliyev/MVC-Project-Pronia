@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MVC_Project.Areas.Admin.ViewModels;
+using MVC_Project.Areas.Admin.ViewModels.Category;
 using MVC_Project.DAL;
 using MVC_Project.Models;
 
@@ -25,19 +27,24 @@ namespace MVC_Project.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Category category)
+        public async Task<IActionResult> Create(CreateCategoryVM vm)
         {
            if (!ModelState.IsValid )
            {
                 return View();
 
            }
-           bool result= _context.Categorys.Any(c=>c.Name.Trim() == category.Name.Trim());  
+           bool result= _context.Categorys.Any(c=>c.Name.Trim() == vm.Name.Trim());  
             if (result)
             {
                 ModelState.AddModelError("Name", "Bu adda category movcuddur");
                 return View();
             }
+
+            Category category = new Category
+            {
+                Name = vm.Name
+            };
             await _context.Categorys.AddAsync(category);    
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));   
@@ -50,10 +57,15 @@ namespace MVC_Project.Areas.Admin.Controllers
             if (id<= 0) return BadRequest();
             Category category=await _context.Categorys.FirstOrDefaultAsync(c=>c.Id==id);
             if (category == null) return NotFound();
-            return View(category);
+            UpdateCategoryVM vm = new UpdateCategoryVM
+            {
+                Name=category.Name
+            };
+
+            return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult>Update(int id,Category category)
+        public async Task<IActionResult>Update(int id,UpdateCategoryVM categoryvm)
         {
             if (!ModelState.IsValid)
             {
@@ -61,14 +73,14 @@ namespace MVC_Project.Areas.Admin.Controllers
             }
             Category exsisted = await _context.Categorys.FirstOrDefaultAsync(c => c.Id == id);
             if(exsisted == null) return NotFound(); 
-            bool result=await _context.Categorys.AnyAsync(c=>c.Name==category.Name&&c.Id!=id);
+            bool result=await _context.Categorys.AnyAsync(c=>c.Name==categoryvm.Name&&c.Id!=id);
             if (result)
             {
                 ModelState.AddModelError("Name", "Bu adda category atriq movcuddur");
 
                 return View();
             }
-            exsisted.Name = category.Name;
+            exsisted.Name = categoryvm.Name;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));  
         }

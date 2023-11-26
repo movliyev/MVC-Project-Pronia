@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using MVC_Project.Areas.Admin.ViewModels;
 using MVC_Project.DAL;
 using MVC_Project.Models;
 using MVC_Project.Utilities.Extensions;
@@ -33,32 +35,45 @@ namespace MVC_Project.Areas.Admin.Controllers
             return View();  
         }
         [HttpPost]
-        public async Task<IActionResult>Create(Slide slide)
+        public async Task<IActionResult>Create(CreateSlideVM slidevm)
         {
 
 
-            if (slide.Photo is null)
+            //if (slidevm.Photo is null)
+            //{
+            //    ModelState.AddModelError("Photo", "Shekil mutleq secilmelidir");
+            //    return View();
+            //}
+
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("Photo", "Shekil mutleq secilmelidir");
                 return View();
             }
 
-            if (!slide.Photo.ValidateType("image/"))
+            if (!slidevm.Photo.ValidateType("image/"))
             {
                 ModelState.AddModelError("Photo", "File tipi uyqun deyil");
                 return View();
             }
 
-            if (!slide.Photo.ValidateSize(2*1024))
+            if (!slidevm.Photo.ValidateSize(2*1024))
             {
                 ModelState.AddModelError("Photo", "File olcusu 2-mb den boyuk olmamalidir");
                 return View();
 
             }
 
-            slide.Image = await slide.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "slider");
+            string filename = await slidevm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "slider");
 
-          
+            Slide slide = new Slide
+            {
+                Image = filename,
+                Title = slidevm.Title,
+                Subtitle = slidevm.Subtitle,
+                Description = slidevm.Description,
+                Order = slidevm.Order
+
+            };
             await _context.Slides.AddAsync(slide);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -70,39 +85,52 @@ namespace MVC_Project.Areas.Admin.Controllers
             if (id <= 0) return BadRequest();
             Slide exsist = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
             if (exsist == null) return NotFound();
-            return View(exsist);
+
+            UpdateSlideVM slidevm = new UpdateSlideVM
+            {
+                Description=exsist.Description,
+                Subtitle=exsist.Subtitle,
+                Order = exsist.Order,
+                Image=exsist.Image,
+                Title= exsist.Title
+            };
+
+            return View(slidevm);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Slide slide)
+        public async Task<IActionResult> Update(int id, UpdateSlideVM slidevm)
         {
-            Slide exsist = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
-            if(exsist == null) return NotFound();
+           
             if (!ModelState.IsValid)
             {
-                return View(exsist);
+                return View(slidevm);
             }
-            if(slide.Photo is not null)
+
+            Slide exsist = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
+            if (exsist == null) return NotFound();
+
+            if (slidevm.Photo is not null)
             {
-                if (!slide.Photo.ValidateType("image/"))
+                if (!slidevm.Photo.ValidateType("image/"))
                 {
                     ModelState.AddModelError("Photo", "File tipi uyqun deyil");
-                    return View(exsist);
+                    return View(slidevm);
                 }
 
-                if (!slide.Photo.ValidateSize(2 * 1024))
+                if (!slidevm.Photo.ValidateSize(2 * 1024))
                 {
                     ModelState.AddModelError("Photo", "File olcusu 2-mb den boyuk olmamalidir");
-                    return View(exsist);
+                    return View(slidevm);
 
                 }
-                string filename = await slide.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "slider");
+                string filename = await slidevm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "slider");
                 exsist.Image.DeleteFile(_env.WebRootPath, "assets", "images", "slider");
                 exsist.Image = filename;
             }
-            exsist.Title= slide.Title;  
-            exsist.Subtitle= slide.Subtitle;    
-            exsist.Order= slide.Order;
-            exsist.Description= slide.Description;  
+            exsist.Title= slidevm.Title;  
+            exsist.Subtitle= slidevm.Subtitle;    
+            exsist.Order= slidevm.Order;
+            exsist.Description= slidevm.Description;  
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

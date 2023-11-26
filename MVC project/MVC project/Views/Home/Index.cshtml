@@ -1699,10 +1699,10 @@
                                 <div class="product-img">
                                     <a href="product/detail/@product.Id">
                                         <img class="primary-img"
-                                             src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true).Url"
+                                             src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true)?.Url"
                                              alt="Product Images" />
                                         <img class="secondary-img"
-                                             src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==false).Url"
+                                             src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==false)?.Url"
                                              alt="Product Images" />
                                     </a>
                                     <div class="product-add-action">
