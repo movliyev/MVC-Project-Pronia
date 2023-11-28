@@ -7,6 +7,7 @@ using MVC_Project.Areas.Admin.ViewModels;
 
 using MVC_Project.DAL;
 using MVC_Project.Models;
+using MVC_Project.Utilities.Extensions;
 
 namespace MVC_Project.Areas.Admin.Controllers
 {
@@ -15,10 +16,12 @@ namespace MVC_Project.Areas.Admin.Controllers
     {
        
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public ProductController(AppDbContext context)
+        public ProductController(AppDbContext context,IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
         public async Task <IActionResult> Index()
         {
@@ -32,12 +35,12 @@ namespace MVC_Project.Areas.Admin.Controllers
 
         public async Task<IActionResult> Create()
         {
+            CreateProductVM cvm = new CreateProductVM();
 
-          ViewBag.Categorys = await _context.Categorys.ToListAsync();
-            ViewBag.Sizes = await _context.Sizes.ToListAsync();
-            ViewBag.Colors = await _context.Colors.ToListAsync();
-
-            ViewBag.Tagids=await _context.Tags.ToListAsync();
+          cvm.Categorys = await _context.Categorys.ToListAsync();
+            cvm.Sizes = await _context.Sizes.ToListAsync();
+            cvm.Colors = await _context.Colors.ToListAsync();
+            cvm.Tags=await _context.Tags.ToListAsync();
             return View();
         }
 
@@ -46,34 +49,34 @@ namespace MVC_Project.Areas.Admin.Controllers
         {
             if(!ModelState.IsValid)
             {
-                ViewBag.Categorys = await _context.Categorys.ToListAsync();
-                ViewBag.Sizes = await _context.Sizes.ToListAsync();
-                ViewBag.Colors = await _context.Colors.ToListAsync();
-                ViewBag.Tagids = await _context.Tags.ToListAsync();
-                return View();
+                vm.Categorys = await _context.Categorys.ToListAsync();
+                vm.Sizes = await _context.Sizes.ToListAsync();
+                vm.Colors = await _context.Colors.ToListAsync();
+                vm.Tags = await _context.Tags.ToListAsync();
+                return View(vm);
             }
             bool result = await _context.Categorys.AnyAsync(c => c.Id == vm.CategoryId);
 
             if(!result)
             {
-                ViewBag.Categorys = await _context.Categorys.ToListAsync();
-                ViewBag.Sizes = await _context.Sizes.ToListAsync();
-                ViewBag.Colors = await _context.Colors.ToListAsync();
-                ViewBag.Tagids = await _context.Tags.ToListAsync();
+                vm.Categorys = await _context.Categorys.ToListAsync();
+                vm.Sizes = await _context.Sizes.ToListAsync();
+                vm.Colors = await _context.Colors.ToListAsync();
+                vm.Tags = await _context.Tags.ToListAsync();
                 ModelState.AddModelError("CategoryId", "Bu id li category movcud deyil");
-                return View();
+                return View(vm);
             }
             foreach (int item in vm.Tagids)
             {
                 bool tagresult=await _context.Tags.AnyAsync(t=>t.Id == item);
                 if (!tagresult)
                 {
-                    ViewBag.Categorys = await _context.Categorys.ToListAsync();
-                    ViewBag.Sizes = await _context.Sizes.ToListAsync();
-                    ViewBag.Colors = await _context.Colors.ToListAsync();
-                    ViewBag.Tagids = await _context.Tags.ToListAsync();
+                    vm.Categorys = await _context.Categorys.ToListAsync();
+                    vm.Sizes = await _context.Sizes.ToListAsync();
+                    vm.Colors = await _context.Colors.ToListAsync();
+                    vm.Tags = await _context.Tags.ToListAsync();
                     ModelState.AddModelError("TagIds", "Bu id li tag movcud deyil");
-                    return View();
+                    return View(vm);
                 }
             }
             foreach (int item in vm.Colorids)
@@ -81,12 +84,12 @@ namespace MVC_Project.Areas.Admin.Controllers
                 bool cresult = await _context.Colors.AnyAsync(t => t.Id == item);
                 if (!cresult)
                 {
-                    ViewBag.Categorys = await _context.Categorys.ToListAsync();
-                    ViewBag.Sizes = await _context.Sizes.ToListAsync();
-                    ViewBag.Colors = await _context.Colors.ToListAsync();
-                    ViewBag.Tagids = await _context.Tags.ToListAsync();
+                    vm.Categorys = await _context.Categorys.ToListAsync();
+                    vm.Sizes = await _context.Sizes.ToListAsync();
+                    vm.Colors = await _context.Colors.ToListAsync();
+                    vm.Tags = await _context.Tags.ToListAsync();
                     ModelState.AddModelError("Colorids", "Bu id li color movcud deyil");
-                    return View();
+                    return View(vm);
                 }
             }
             foreach (int item in vm.Sizeids)
@@ -94,15 +97,68 @@ namespace MVC_Project.Areas.Admin.Controllers
                 bool sresult = await _context.Sizes.AnyAsync(t => t.Id == item);
                 if (!sresult)
                 {
-                    ViewBag.Categorys = await _context.Categorys.ToListAsync();
-                    ViewBag.Sizes = await _context.Sizes.ToListAsync();
-                    ViewBag.Colors = await _context.Colors.ToListAsync();
-                    ViewBag.Tagids = await _context.Tags.ToListAsync();
+                    vm.Categorys = await _context.Categorys.ToListAsync();
+                    vm.Sizes = await _context.Sizes.ToListAsync();
+                    vm.Colors = await _context.Colors.ToListAsync();
+                    vm.Tags = await _context.Tags.ToListAsync();
                     ModelState.AddModelError("TagIds", "Bu id li size movcud deyil");
-                    return View();
+                    return View(vm);
                 }
             }
 
+            if (!vm.MainPhoto.ValidateType("image/"))
+            {
+                vm.Categorys = await _context.Categorys.ToListAsync();
+                vm.Sizes = await _context.Sizes.ToListAsync();
+                vm.Colors = await _context.Colors.ToListAsync();
+                vm.Tags = await _context.Tags.ToListAsync();
+                ModelState.AddModelError("MainPhoto", "Fayl tipi uyqun deyil");
+                return View(vm);
+            }
+
+            if (!vm.MainPhoto.ValidateSize(600))
+            {
+                vm.Categorys = await _context.Categorys.ToListAsync();
+                vm.Sizes = await _context.Sizes.ToListAsync();
+                vm.Colors = await _context.Colors.ToListAsync();
+                vm.Tags = await _context.Tags.ToListAsync();
+                ModelState.AddModelError("MainPhoto", "Fayl olcusu uyqun deyil");
+                return View(vm);
+
+            }
+            if (!vm.HoverPhoto.ValidateType("image/"))
+            {
+                vm.Categorys = await _context.Categorys.ToListAsync();
+                vm.Sizes = await _context.Sizes.ToListAsync();
+                vm.Colors = await _context.Colors.ToListAsync();
+                vm.Tags = await _context.Tags.ToListAsync();
+                ModelState.AddModelError("HoverPhoto", "Fayl tipi uyqun deyil");
+                return View(vm);
+            }
+
+            if (!vm.HoverPhoto.ValidateSize(600))
+            {
+                vm.Categorys = await _context.Categorys.ToListAsync();
+                vm.Sizes = await _context.Sizes.ToListAsync();
+                vm.Colors = await _context.Colors.ToListAsync();
+                vm.Tags = await _context.Tags.ToListAsync();
+                ModelState.AddModelError("HoverPhoto", "Fayl olcusu uyqun deyil");
+                return View(vm);
+
+            }
+
+            ProductImage main = new ProductImage
+            {
+                IsPrimary = true,
+                Url=await vm.MainPhoto.CreateFileAsync(_env.WebRootPath,"assets","images","website-images")
+                
+            };
+            ProductImage hover = new ProductImage
+            {
+                IsPrimary = false,
+                Url = await vm.HoverPhoto.CreateFileAsync(_env.WebRootPath, "assets", "images", "website-images")
+
+            };
             Product product = new Product
             {
                 SKU = vm.SKU,
@@ -112,10 +168,37 @@ namespace MVC_Project.Areas.Admin.Controllers
                 CategoryId =(int) vm.CategoryId,
                 ProductTags=new List<ProductTag>(),
                 ProductSizes = new List<ProductSize>(),
-                ProductColors = new List<ProductColor>()
+                ProductColors = new List<ProductColor>(),
+                ProductImages = new List<ProductImage> { main,hover}
+                
 
 
             };
+
+            TempData["Message"] = "";
+
+            foreach (IFormFile photo in vm.Photos ?? new List<IFormFile>())
+            {
+                if (!photo.ValidateType("image/"))
+                {
+                    TempData["Message"] += $" <p class=\"text-danger\">{photo.FileName} ali file tipi uyqun deyil</p>";
+                    continue;
+                }
+                if (!photo.ValidateSize(600))
+                {
+                    TempData["Message"] += $"<p class=\"text-danger\">{photo.FileName} ali file olcusu uyqun deyil</p>";
+
+                    continue;
+                }
+
+                product.ProductImages.Add(new ProductImage
+                {
+                    IsPrimary = null,
+                    Url = await photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "website-images")
+
+                });
+
+            }
 
             foreach (var item in vm.Tagids)
             {
@@ -208,23 +291,26 @@ namespace MVC_Project.Areas.Admin.Controllers
                 return View(pvm);
             }
 
-            foreach (var item in exsist.ProductTags)
+           exsist.ProductTags.RemoveAll(pt=>!pvm.Tagids.Exists(tid=>tid==pt.TagId));
+
+
+            List<int>create=pvm.Tagids.Where(tid=>!exsist.ProductTags.Exists(pt=>pt.TagId==tid)).ToList();
+            foreach (var tid in create)
             {
-                if (!pvm.Tagids.Exists(t => t == item.TagId))
+                bool tresult = await _context.Tags.AnyAsync(t => t.Id == tid);
+                if (!tresult)
                 {
-                    _context.ProductTags.Remove(item);
+                    pvm.Categorys = await _context.Categorys.ToListAsync();
+                    pvm.Tags = await _context.Tags.ToListAsync();
+                    pvm.Colors = await _context.Colors.ToListAsync();
+                    pvm.Sizes = await _context.Sizes.ToListAsync();
+                    ModelState.AddModelError("CategoryId", "Bele bir tag movcud deyil");
+                    return View(pvm);
                 }
+                exsist.ProductTags.Add(new ProductTag { TagId = tid });
             }
 
-            foreach (int item in pvm.Tagids)
-            {
-                if (!exsist.ProductTags.Any(p => p.TagId == item))
-                {
-                    exsist.ProductTags.Add(new ProductTag
-                    { TagId = item });
-
-                }
-            }
+         
             foreach (var item in exsist.ProductColors)
             {
                 if (!pvm.Colorids.Exists(t => t == item.ColorId))

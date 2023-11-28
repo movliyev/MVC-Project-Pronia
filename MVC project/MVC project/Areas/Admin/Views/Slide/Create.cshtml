@@ -12,7 +12,7 @@
                         <form class="forms-sample" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label asp-for ="Photo">Photo</label>
-                                <input asp-for="Photo" class="form-control"  placeholder="Photo" >
+                                <input asp-for="Photo" class="form-control" placeholder="Photo" accept="image/*">
                                 <span class="text-danger" asp-validation-for="Photo"></span>
                             </div>
                             <div class="form-group">

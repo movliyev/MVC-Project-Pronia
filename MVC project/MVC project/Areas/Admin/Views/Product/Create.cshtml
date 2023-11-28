@@ -7,9 +7,24 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Create Slide</h4>
+                        <h4 class="card-title">Create Product</h4>
                        
                         <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label asp-for="MainPhoto" >Main Image</label>
+                                <input asp-for="MainPhoto" class="form-control" accept="image/*" >
+                                <span class="text-danger" asp-validation-for="MainPhoto"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="HoverPhoto">Hover Image</label>
+                                <input asp-for="HoverPhoto" class="form-control" accept="image/*">
+                                <span class="text-danger" asp-validation-for="HoverPhoto"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Photos">Additional Images</label>
+                                <input asp-for="Photos" class="form-control" accept="image/*">
+                                <span class="text-danger" asp-validation-for="Photos"></span>
+                            </div>
                             <div class="form-group">
                                 <label asp-for ="Name">Name</label>
                                 <input asp-for="Name" class="form-control"  placeholder="Name" >
@@ -28,7 +43,7 @@
                             <div class="form-group">
                                 <label asp-for="CategoryId">Category</label>
                              
-                                <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(ViewBag.Categorys,nameof(Category.Id),nameof(Category.Name))">
+                                <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(Model.Categorys,nameof(Category.Id),nameof(Category.Name))">
                                     <option disabled selected> Chosse Category </option>
                                 </select>
                               
@@ -37,16 +52,16 @@
                             <div class="form-group">
                                 <label asp-for="Tagids">Tag</label>
                               
-                                <select asp-for="Tagids" class="form-control" asp-items="new SelectList(ViewBag.Tagids,nameof(Tag.Id),nameof(Tag.Name))">
+                                <select asp-for="Tagids" class="form-control" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))">
                                   
                                 </select>
 
-                                <span class="text-danger" asp-validation-for="CategoryId"></span>
+                                <span class="text-danger" asp-validation-for="Tagids"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Colorids">Color</label>
 
-                                <select asp-for="Colorids" class="form-control" asp-items="new SelectList(ViewBag.Colorids,nameof(Color.Id),nameof(Color.Name))">
+                                <select asp-for="Colorids" class="form-control" asp-items="new SelectList(Model.Colors,nameof(Color.Id),nameof(Color.Name))">
                                 </select>
 
                                 <span class="text-danger" asp-validation-for="Colorids"></span>
@@ -54,7 +69,7 @@
                             <div class="form-group">
                                 <label asp-for="Sizeids">Size</label>
 
-                                <select asp-for="Sizeids" class="form-control" asp-items="new SelectList(ViewBag.Sizeids,nameof(Size.Id),nameof(Size.Name))">
+                                <select asp-for="Sizeids" class="form-control" asp-items="new SelectList(Model.Sizes,nameof(Size.Id),nameof(Size.Name))">
                                 </select>
 
                                 <span class="text-danger" asp-validation-for="Sizeids"></span>

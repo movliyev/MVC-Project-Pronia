@@ -20,6 +20,10 @@ namespace MVC_Project.Areas.Admin.ViewModels
         public List<Tag>? Tags { get; set; }
         public List<Size>? Sizes { get; set; }
         public List<Color>? Colors { get; set; }
+        public IFormFile MainPhoto { get; set; }
+        public IFormFile HoverPhoto { get; set; }
+        public List<IFormFile>? Photos { get; set; }
+
 
 
     }
