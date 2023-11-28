@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
-namespace MVC_Project.Areas.Admin.ViewModels.Category
+using System.ComponentModel.DataAnnotations;
+
+namespace MVC_Project.Areas.Admin.ViewModels
 {
     public class UpdateCategoryVM
     {

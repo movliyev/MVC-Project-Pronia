@@ -27,20 +27,37 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="CategoryId">Category</label>
-                               @*  <select asp-for="CategoryId" class="form-control">
-
-                                   @foreach (var item in ViewBag.Categorys)
-                                    {
-                                        <option value="@item.Id"> @item.Name </option>
-                                    }
-                                    <option disabled selected> Chosse Category </option>
-
-                                </select> *@
+                             
                                 <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(ViewBag.Categorys,nameof(Category.Id),nameof(Category.Name))">
                                     <option disabled selected> Chosse Category </option>
                                 </select>
                               
                                 <span class="text-danger" asp-validation-for="CategoryId"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Tagids">Tag</label>
+                              
+                                <select asp-for="Tagids" class="form-control" asp-items="new SelectList(ViewBag.Tagids,nameof(Tag.Id),nameof(Tag.Name))">
+                                  
+                                </select>
+
+                                <span class="text-danger" asp-validation-for="CategoryId"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Colorids">Color</label>
+
+                                <select asp-for="Colorids" class="form-control" asp-items="new SelectList(ViewBag.Colorids,nameof(Color.Id),nameof(Color.Name))">
+                                </select>
+
+                                <span class="text-danger" asp-validation-for="Colorids"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Sizeids">Size</label>
+
+                                <select asp-for="Sizeids" class="form-control" asp-items="new SelectList(ViewBag.Sizeids,nameof(Size.Id),nameof(Size.Name))">
+                                </select>
+
+                                <span class="text-danger" asp-validation-for="Sizeids"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Description">Description</label>

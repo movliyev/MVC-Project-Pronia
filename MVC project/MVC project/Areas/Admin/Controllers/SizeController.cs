@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MVC_Project.Areas.Admin.ViewModels;
 using MVC_Project.DAL;
 using MVC_Project.Models;
 
@@ -25,19 +27,23 @@ namespace MVC_Project.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Size size)
+        public async Task<IActionResult> Create(CreateSizeVM vm)
         {
             if (!ModelState.IsValid)
             {
                 return View();
 
             }
-            bool result = _context.Sizes.Any(c => c.Name.Trim() == size.Name.Trim());
+            bool result = _context.Sizes.Any(c => c.Name.Trim() == vm.Name.Trim());
             if (result)
             {
                 ModelState.AddModelError("Name", "Bu adda size movcuddur");
                 return View();
             }
+            Size size = new Size
+            {
+                Name = vm.Name,   
+            };
             await _context.Sizes.AddAsync(size);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -49,10 +55,14 @@ namespace MVC_Project.Areas.Admin.Controllers
             if (id <= 0) return BadRequest();
             Size size = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
             if (size == null) return NotFound();
-            return View(size);
+            UpdateSizeVM vm = new UpdateSizeVM
+            {
+                Name = size.Name,
+            };
+            return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Size size)
+        public async Task<IActionResult> Update(int id, UpdateSizeVM svm)
         {
             if (!ModelState.IsValid)
             {
@@ -60,14 +70,14 @@ namespace MVC_Project.Areas.Admin.Controllers
             }
             Size exsisted = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
             if (exsisted == null) return NotFound();
-            bool result = await _context.Sizes.AnyAsync(s => s.Name == size.Name && s.Id != id);
+            bool result = await _context.Sizes.AnyAsync(s => s.Name == svm.Name && s.Id != id);
             if (result)
             {
                 ModelState.AddModelError("Name", "Bu adda size atriq movcuddur");
 
                 return View();
             }
-            exsisted.Name = size.Name;
+            exsisted.Name = svm.Name;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

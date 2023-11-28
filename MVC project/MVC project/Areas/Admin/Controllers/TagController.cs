@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MVC_Project.Areas.Admin.ViewModels.Tag;
+using MVC_Project.Areas.Admin.ViewModels;
 using MVC_Project.DAL;
 using MVC_Project.Models;
 

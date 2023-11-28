@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
-namespace MVC_Project.Areas.Admin.ViewModels.Tag
+namespace MVC_Project.Areas.Admin.ViewModels
 {
     public class CreateTagVM
     {
