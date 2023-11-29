@@ -8,6 +8,7 @@ using MVC_Project.Areas.Admin.ViewModels;
 using MVC_Project.DAL;
 using MVC_Project.Models;
 using MVC_Project.Utilities.Extensions;
+using System.Drawing;
 
 namespace MVC_Project.Areas.Admin.Controllers
 {
@@ -41,7 +42,7 @@ namespace MVC_Project.Areas.Admin.Controllers
             cvm.Sizes = await _context.Sizes.ToListAsync();
             cvm.Colors = await _context.Colors.ToListAsync();
             cvm.Tags=await _context.Tags.ToListAsync();
-            return View();
+            return View(cvm);
         }
 
         [HttpPost]
@@ -227,7 +228,7 @@ namespace MVC_Project.Areas.Admin.Controllers
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
 
-            return View(nameof(Index));  
+            return RedirectToAction(nameof(Index));  
         }
 
 
@@ -236,6 +237,7 @@ namespace MVC_Project.Areas.Admin.Controllers
             if (id <= 0) return BadRequest();
             Product product = await _context.Products
                 .Include(p => p.ProductTags)
+                .Include(p=>p.ProductImages)
                 .Include(p=>p.ProductColors)
                 .Include(p=>p.ProductSizes)
                 .FirstOrDefaultAsync(p=> p.Id == id);  
@@ -248,45 +250,111 @@ namespace MVC_Project.Areas.Admin.Controllers
                 Description = product.Description,
                 SKU = product.SKU,
                 CategoryId = product.CategoryId,    
+                ProductImages=product.ProductImages,
                 Tagids=product.ProductTags.Select(p => p.TagId).ToList(), 
                 Colorids = product.ProductColors.Select(p=>p.ColorId).ToList(),
                 Sizeids = product.ProductSizes.Select(p=>p.SizeId).ToList(),    
                 Categorys= await _context.Categorys.ToListAsync()  ,
                 Tags=await _context.Tags.ToListAsync(),
                 Colors=await _context.Colors.ToListAsync(),
-                Sizes=await _context.Sizes.ToListAsync(),
+                Sizes=await _context.Sizes.ToListAsync()
 
 
             };
+
+
+            await _context.SaveChangesAsync();
+
 
             return View(vm);
         }
         [HttpPost]
         public async Task<IActionResult> Update(int id,UpdateProductVM pvm)
         {
+            Product exsist = await _context.Products
+              .Include(p => p.ProductTags)
+              .Include(p => p.ProductSizes)
+              .Include(p => p.ProductColors)
+              .Include(p => p.ProductImages)
+              .FirstOrDefaultAsync(p => p.Id == id);
             if (!ModelState.IsValid)
             {
                 pvm.Categorys=await _context.Categorys.ToListAsync();
                 pvm.Tags=await _context.Tags.ToListAsync();
                 pvm.Colors=await _context.Colors.ToListAsync(); 
                 pvm.Sizes=await _context.Sizes.ToListAsync();
+                pvm.ProductImages = exsist.ProductImages;
+
                 return View(pvm);
             }
-            Product exsist = await _context.Products
-                .Include(p=>p.ProductTags)
-                .Include(p => p.ProductSizes)
-                .Include(p => p.ProductColors)
-
-                .FirstOrDefaultAsync(p => p.Id == id);
+          
                 if(exsist == null)return NotFound();
+            if(pvm.MainPhoto is not null)
+            {
+                if (!pvm.MainPhoto.ValidateType("image/"))
+                {
+                    pvm.Categorys = await _context.Categorys.ToListAsync();
+                    pvm.Sizes = await _context.Sizes.ToListAsync();
+                    pvm.Colors = await _context.Colors.ToListAsync();
+                    pvm.Tags = await _context.Tags.ToListAsync();
+                    pvm.ProductImages=exsist.ProductImages;
+                    ModelState.AddModelError("MainPhoto", "Fayl tipi uyqun deyil");
+                    return View(pvm);
+                }
 
-                bool result=await _context.Categorys.AnyAsync(c=>c.Id==pvm.CategoryId);
+                if (!pvm.MainPhoto.ValidateSize(600))
+                {
+                    pvm.Categorys = await _context.Categorys.ToListAsync();
+                    pvm.Sizes = await _context.Sizes.ToListAsync();
+                    pvm.Colors = await _context.Colors.ToListAsync();
+                    pvm.Tags = await _context.Tags.ToListAsync();
+                    pvm.ProductImages = exsist.ProductImages;
+
+                    ModelState.AddModelError("MainPhoto", "Fayl olcusu uyqun deyil");
+                    return View(pvm);
+
+                }
+
+            }
+            if (pvm.HoverPhoto is not null)
+            {
+                if (!pvm.HoverPhoto.ValidateType("image/"))
+                {
+                    pvm.Categorys = await _context.Categorys.ToListAsync();
+                    pvm.Sizes = await _context.Sizes.ToListAsync();
+                    pvm.Colors = await _context.Colors.ToListAsync();
+                    pvm.Tags = await _context.Tags.ToListAsync();
+                    pvm.ProductImages = exsist.ProductImages;
+                    ModelState.AddModelError("HoverPhoto", "Fayl tipi uyqun deyil");
+                    return View(pvm);
+                }
+
+                if (!pvm.HoverPhoto.ValidateSize(600))
+                {
+                    pvm.Categorys = await _context.Categorys.ToListAsync();
+                    pvm.Sizes = await _context.Sizes.ToListAsync();
+                    pvm.Colors = await _context.Colors.ToListAsync();
+                    pvm.Tags = await _context.Tags.ToListAsync();
+                    pvm.ProductImages = exsist.ProductImages;
+
+                    ModelState.AddModelError("HoverPhoto", "Fayl olcusu uyqun deyil");
+                    return View(pvm);
+
+                }
+
+            }
+
+
+
+            bool result=await _context.Categorys.AnyAsync(c=>c.Id==pvm.CategoryId);
             if(!result)
             {
                 pvm.Categorys = await _context.Categorys.ToListAsync();
                 pvm.Tags = await _context.Tags.ToListAsync();
                 pvm.Colors = await _context.Colors.ToListAsync();
                 pvm.Sizes = await _context.Sizes.ToListAsync();
+                pvm.ProductImages = exsist.ProductImages;
+
                 ModelState.AddModelError("CategoryId", "Bele bir category movcud deyil");
                 return View(pvm);
             }
@@ -304,6 +372,8 @@ namespace MVC_Project.Areas.Admin.Controllers
                     pvm.Tags = await _context.Tags.ToListAsync();
                     pvm.Colors = await _context.Colors.ToListAsync();
                     pvm.Sizes = await _context.Sizes.ToListAsync();
+                    pvm.ProductImages = exsist.ProductImages;
+
                     ModelState.AddModelError("CategoryId", "Bele bir tag movcud deyil");
                     return View(pvm);
                 }
@@ -345,16 +415,100 @@ namespace MVC_Project.Areas.Admin.Controllers
 
                 }
             }
+
+            if(pvm.MainPhoto != null)
+            {
+                string fileNAme = await pvm.MainPhoto.CreateFileAsync(_env.WebRootPath, "assets", "images", "website-images");
+
+                ProductImage eximg=exsist.ProductImages.FirstOrDefault(p=>p.IsPrimary==true);
+                eximg.Url.DeleteFile(_env.WebRootPath, "assets", "images", "website-images");
+                exsist.ProductImages.Remove(eximg);
+
+                exsist.ProductImages.Add(new ProductImage
+                {
+                    IsPrimary = true,   
+                    Url=pvm.Name
+                });
+            }
+            if (pvm.HoverPhoto != null)
+            {
+                string fileNAme = await pvm.HoverPhoto.CreateFileAsync(_env.WebRootPath, "assets", "images", "website-images");
+
+                ProductImage eximg = exsist.ProductImages.FirstOrDefault(p => p.IsPrimary == false);
+                eximg.Url.DeleteFile(_env.WebRootPath, "assets", "images", "website-images");
+                exsist.ProductImages.Remove(eximg);
+
+                exsist.ProductImages.Add(new ProductImage
+                {
+                    IsPrimary = true,
+                    Url = pvm.Name
+                });
+            }
+
+            if(pvm.Imageids is null)
+            {
+                pvm.Imageids = new List<int>();
+            }
+            List<ProductImage> remov = exsist.ProductImages.Where(p => !pvm.Imageids.Exists(imgId => imgId == p.Id)&&p.IsPrimary==null).ToList();
+            foreach (ProductImage item in remov)
+            {
+                item.Url.DeleteFile(_env.WebRootPath, "assets", "images", "website-images");
+                exsist.ProductImages.Remove(item);
+            }
+
+            TempData["Message"] = "";
+
+            foreach (IFormFile photo in pvm.Photos ?? new List<IFormFile>())
+            {
+                if (!photo.ValidateType("image/"))
+                {
+                    TempData["Message"] += $" <p class=\"text-danger\">{photo.FileName} ali file tipi uyqun deyil</p>";
+                    continue;
+                }
+                if (!photo.ValidateSize(600))
+                {
+                    TempData["Message"] += $"<p class=\"text-danger\">{photo.FileName} ali file olcusu uyqun deyil</p>";
+
+                    continue;
+                }
+
+                exsist.ProductImages.Add(new ProductImage
+                {
+                    IsPrimary = null,
+                    Url = await photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "website-images")
+
+                });
+
+            }
+
             exsist.Name = pvm.Name;
             exsist.Description = pvm.Description;   
             exsist.Price = pvm.Price;   
             exsist.SKU = pvm.SKU;   
             exsist.CategoryId = pvm.CategoryId;
+
+
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
         }
 
+
+        public async Task<IActionResult> Delete (int id)
+        {
+            if (id <= 0) return BadRequest();
+
+            Product product=await _context.Products.Include(p=>p.ProductImages).FirstOrDefaultAsync(p=>p.Id==id);
+            if(product == null) return NotFound();
+            foreach (var item in product.ProductImages ?? new List<ProductImage>())
+            {
+                item.Url.DeleteFile(_env.WebRootPath, "assets", "images", "website-images");
+            }
+            _context.Products.Remove(product);  
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
 
 

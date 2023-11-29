@@ -13,7 +13,7 @@
 
                                     <a href="~/assets/images/website-images/@item.Url"
                                        class="single-img gallery-popup">
-                                        <img class="img-full"
+                                        <img style="width:150px;height:150px;" class="img-full"
                                              src="~/assets/images/website-images/@item.Url"
                                              alt="Product Image" />
                                     </a>
@@ -26,7 +26,7 @@
                                 <div class="swiper-slide">
                                     <a href="~/assets/images/website-images/@item.Url"
                                        class="single-img gallery-popup">
-                                        <img class="img-full"
+                                        <img style="width:150px;height:150px;" class="img-full"
                                              src="~/assets/images/website-images/@item.Url"
                                              alt="Product Image" />
                                     </a>
@@ -41,7 +41,7 @@
                                 @foreach (ProductImage item in Model.ProductImages.FindAll(x => x.IsPrimary == null))
                                 {
                                     <a href="#" class="swiper-slide">
-                                        <img class="img-full"
+                                        <img style="width:150px;height:150px;" class="img-full"
                                              src="~/assets/images/website-images/@item.Url"
                                              alt="Product Thumnail" />
                                     </a>

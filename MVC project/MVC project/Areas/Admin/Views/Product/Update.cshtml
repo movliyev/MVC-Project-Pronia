@@ -11,6 +11,41 @@
                        
                         <form class="forms-sample" method="post" enctype="multipart/form-data">
                             <div class="form-group">
+
+                               <img style="width:150px;height:150px;" src="~/assets/images/website-images/@Model.ProductImages.FirstOrDefault(p=>p.IsPrimary==true)?.Url"/>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MainPhoto">Main Image</label>
+                                <input asp-for="MainPhoto" class="form-control" accept="image/*">
+                                <span class="text-danger" asp-validation-for="MainPhoto"></span>
+                            </div>
+                            <div class="form-group">
+                                <img style="width:150px;height:150px;" src="~/assets/images/website-images/@Model.ProductImages.FirstOrDefault(p=>p.IsPrimary==false)?.Url" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="HoverPhoto">Hover Image</label>
+                                <input asp-for="HoverPhoto" class="form-control" accept="image/*">
+                                <span class="text-danger" asp-validation-for="HoverPhoto"></span>
+                            </div>
+                            <div class="form-group  d-flex ">
+                               @foreach (ProductImage image in Model.ProductImages.Where(p=>p.IsPrimary==null))
+                               {
+                                   <div class="position-relative">
+                                        <img style="width:150px;height:150px;" src="~/assets/images/website-images/@image.Url" />
+                                        <input asp-for="Imageids" type="hidden" value="@image.Id">
+                                        <button type="button" style="right:5px;top:5px;" class="cus-delete btn btn-danger position-absolute">X</button>
+                                   </div>
+                                   
+
+                               }
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Photos">Additional Images</label>
+                                <input asp-for="Photos" class="form-control" accept="image/*">
+                                <span class="text-danger" asp-validation-for="Photos"></span>
+                            </div>
+                            <div class="form-group">
                                 <label asp-for ="Name">Name</label>
                                 <input asp-for="Name" class="form-control"  placeholder="Name" >
                                 <span class="text-danger" asp-validation-for="Name"></span>
@@ -72,4 +107,21 @@
             </div>
         </div>
     </div>
+
+
 </div>
+
+
+
+@section DeleteImage{
+    <script>
+        var btns = document.querySelectorAll(".cus-delete")
+        btns.forEach(b => {
+            b.addEventListener("click", function () {
+                b.parentElement.remove();
+
+            })
+        })
+    </script>
+
+}
