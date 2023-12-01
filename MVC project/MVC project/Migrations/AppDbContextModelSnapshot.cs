@@ -32,11 +32,12 @@ namespace MVC_Project.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorys", (string)null);
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Color", b =>
@@ -49,11 +50,12 @@ namespace MVC_Project.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors", (string)null);
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Product", b =>
@@ -86,7 +88,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductColor", b =>
@@ -109,7 +111,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductColors", (string)null);
+                    b.ToTable("ProductColors");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductImage", b =>
@@ -134,7 +136,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductSize", b =>
@@ -157,7 +159,7 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("SizeId");
 
-                    b.ToTable("ProductSizes", (string)null);
+                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductTag", b =>
@@ -180,7 +182,28 @@ namespace MVC_Project.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("ProductTags", (string)null);
+                    b.ToTable("ProductTags");
+                });
+
+            modelBuilder.Entity("MVC_Project.Models.Setting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Size", b =>
@@ -193,11 +216,12 @@ namespace MVC_Project.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes", (string)null);
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Slide", b =>
@@ -232,7 +256,7 @@ namespace MVC_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Slides", (string)null);
+                    b.ToTable("Slides");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Tag", b =>
@@ -245,11 +269,12 @@ namespace MVC_Project.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Product", b =>
@@ -265,7 +290,7 @@ namespace MVC_Project.Migrations
 
             modelBuilder.Entity("MVC_Project.Models.ProductColor", b =>
                 {
-                    b.HasOne("MVC_Project.Models.Color", "Tag")
+                    b.HasOne("MVC_Project.Models.Color", "Color")
                         .WithMany("ProductColors")
                         .HasForeignKey("ColorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -277,9 +302,9 @@ namespace MVC_Project.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Color");
 
-                    b.Navigation("Tag");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.ProductImage", b =>
@@ -296,13 +321,13 @@ namespace MVC_Project.Migrations
             modelBuilder.Entity("MVC_Project.Models.ProductSize", b =>
                 {
                     b.HasOne("MVC_Project.Models.Product", "Product")
-                        .WithMany("ProductSize")
+                        .WithMany("ProductSizes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MVC_Project.Models.Size", "Size")
-                        .WithMany("ProductSize")
+                        .WithMany("ProductSizes")
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -347,14 +372,14 @@ namespace MVC_Project.Migrations
 
                     b.Navigation("ProductImages");
 
-                    b.Navigation("ProductSize");
+                    b.Navigation("ProductSizes");
 
                     b.Navigation("ProductTags");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Size", b =>
                 {
-                    b.Navigation("ProductSize");
+                    b.Navigation("ProductSizes");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Tag", b =>

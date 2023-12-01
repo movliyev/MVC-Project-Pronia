@@ -27,7 +27,7 @@ namespace MVC_Project.Controllers
             {
                 Slides = slides,
                 Products = products,
-                LatestsSliders= _context.Slides.OrderByDescending(x => x.Order).Take(4).ToList()
+                LatestsSliders= _context.Slides.OrderByDescending(x => x.Order).Take(6).ToList()
 
             };
 
