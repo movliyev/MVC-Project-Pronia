@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,9 @@ using System.Drawing;
 
 namespace MVC_Project.Areas.Admin.Controllers
 {
+
     [Area("Admin")]
+
     public class ProductController : Controller
     {
        
@@ -24,6 +27,9 @@ namespace MVC_Project.Areas.Admin.Controllers
             _context = context;
             _env = env;
         }
+
+        [Authorize(Roles = "Admin,Moderator")]
+
         public async Task <IActionResult> Index()
         {
             List<Product> products = await _context.Products
@@ -33,6 +39,7 @@ namespace MVC_Project.Areas.Admin.Controllers
 
             return View(products);
         }
+        [Authorize(Roles = "Admin,Moderator")]
 
         public async Task<IActionResult> Create()
         {
@@ -231,7 +238,7 @@ namespace MVC_Project.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));  
         }
 
-
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult>Update(int id)
         {
             if (id <= 0) return BadRequest();
@@ -494,7 +501,7 @@ namespace MVC_Project.Areas.Admin.Controllers
 
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete (int id)
         {
             if (id <= 0) return BadRequest();
