@@ -15,8 +15,8 @@ namespace MVC_Project.ViewComponentss
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            Dictionary<string,string> headers=await _context.Settings.ToDictionaryAsync(s=>s.Key,s=>s.Value);
-            return View(headers);
+            Dictionary<string,string> header=await _context.Settings.ToDictionaryAsync(s=>s.Key,s=>s.Value);
+            return View(header);
         }
     }
 }
