@@ -46,7 +46,7 @@
                                         total += item.SubTotal;
                                         <tr>
                                             <td class="product_remove">
-                                                <a href="#">
+                                                <a asp-action="RemoveBasket" asp-controller="basket" asp-route-id="@item.Id">
                                                     <i class="pe-7s-close"
                                                    data-tippy="Remove"
                                                    data-tippy-inertia="true"

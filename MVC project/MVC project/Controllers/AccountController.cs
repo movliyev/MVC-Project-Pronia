@@ -110,6 +110,7 @@ namespace MVC_Project.Controllers
 
         public async Task<IActionResult> LogOut()
         {
+
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index","Home");    
         }

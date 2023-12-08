@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IOw2TN+CBqUS2b6zTOjm04o730dzup81um32H/RhKXtn0wRtc6yCblcMtvP8o1P+QvNtizX+N/ADRZVSqetQuw==",
+  "dgSpecHash": "9IAC0XPnwx3wzMjQiChHEUAVKjbuauvyG6HUJTNkaKJP2ol41G/UU5ThJidNmzxnXwAWtAZOJ3XR67utZNSXHA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\MVC Project.csproj",
+  "projectFilePath": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC-Project-Pronia\\MVC project\\MVC Project\\MVC Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\helpdesk_connect\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\helpdesk_connect\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

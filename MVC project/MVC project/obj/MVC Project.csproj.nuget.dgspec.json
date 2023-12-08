@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\MVC Project.csproj": {}
+    "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC-Project-Pronia\\MVC project\\MVC Project\\MVC Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\MVC Project.csproj": {
+    "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC-Project-Pronia\\MVC project\\MVC Project\\MVC Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\MVC Project.csproj",
+        "projectUniqueName": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC-Project-Pronia\\MVC project\\MVC Project\\MVC Project.csproj",
         "projectName": "MVC Project",
-        "projectPath": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\MVC Project.csproj",
+        "projectPath": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC-Project-Pronia\\MVC project\\MVC Project\\MVC Project.csproj",
         "packagesPath": "C:\\Users\\helpdesk_connect\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC project\\MVC Project\\obj\\",
+        "outputPath": "C:\\Users\\helpdesk_connect\\Desktop\\MVC project Pronia\\MVC-Project-Pronia\\MVC project\\MVC Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
