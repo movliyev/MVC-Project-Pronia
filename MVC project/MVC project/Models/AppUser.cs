@@ -8,6 +8,7 @@ namespace MVC_Project.Models
         public string Surname { get; set; }
         public string Gender { get; set; }
         public List<BasketItem> BasketItems { get; set; }
+        //public List<Order> Orderss { get; set; }
 
     }
 }

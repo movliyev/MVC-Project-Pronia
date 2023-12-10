@@ -178,7 +178,26 @@ namespace MVC_Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("PurchasedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Orders");
                 });
@@ -538,7 +557,7 @@ namespace MVC_Project.Migrations
             modelBuilder.Entity("MVC_Project.Models.BasketItem", b =>
                 {
                     b.HasOne("MVC_Project.Models.AppUser", "AppUsers")
-                        .WithMany()
+                        .WithMany("BasketItems")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -558,6 +577,17 @@ namespace MVC_Project.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MVC_Project.Models.Order", b =>
+                {
+                    b.HasOne("MVC_Project.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Product", b =>
@@ -688,6 +718,11 @@ namespace MVC_Project.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MVC_Project.Models.AppUser", b =>
+                {
+                    b.Navigation("BasketItems");
                 });
 
             modelBuilder.Entity("MVC_Project.Models.Category", b =>

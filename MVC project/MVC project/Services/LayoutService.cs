@@ -32,7 +32,7 @@ namespace MVC_Project.Services
             if (_http.HttpContext.User.Identity.IsAuthenticated)
             {
                 AppUser user = await _userManager.Users
-                   .Include(u => u.BasketItems)
+                   .Include(u => u.BasketItems.Where(b => b.OrderId == null))
                    .ThenInclude(b => b.Product)
                    .ThenInclude(b => b.ProductImages.Where(p => p.IsPrimary == true))
                    .FirstOrDefaultAsync(u => u.Id == _http.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));

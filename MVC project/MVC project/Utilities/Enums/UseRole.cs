@@ -4,6 +4,6 @@
     {
         Admin,
         Moderator,
-        Member
+        Member,
     }
 }

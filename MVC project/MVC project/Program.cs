@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.DAL;
+using MVC_Project.Interfaces;
 using MVC_Project.Models;
 using MVC_Project.Services;
 
@@ -30,8 +31,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<LayoutService>();
+builder.Services.AddScoped<IEmailService,EmailService>();
+
 var app = builder.Build();
 
 app.UseAuthentication();
