@@ -8,7 +8,7 @@
         <div class="col-xl-3 col-md-4 col-sm-6">
             <div class="product-item">
                 <div class="product-img">
-                    <a href="product/detail/@item.Id">
+                    <a asp-action="detail" asp-controller="product" asp-route-id="@item.Id">
                         <img class="primary-img"
                              src="~/assets/images/website-images/@item.ProductImages.FirstOrDefault(p=>p.IsPrimary==true)?.Url"
                              alt="Product Images" />

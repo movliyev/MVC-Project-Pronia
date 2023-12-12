@@ -28,18 +28,31 @@ namespace MVC_Project.Areas.Admin.Controllers
             _env = env;
         }
 
-        [Authorize(Roles = "Admin,Moderator")]
+        //[Authorize(Roles = "Admin,Moderator")]
 
-        public async Task <IActionResult> Index()
+        public async Task <IActionResult> Index(int page=1)
         {
-            List<Product> products = await _context.Products
+            if(page<1) return BadRequest();
+            
+            int count=await _context.Products.CountAsync();
+           
+            List<Product> products = await _context.Products.Skip((page-1)*3).Take(3)
                 .Include(p=>p.Category)
                 .Include(p=>p.ProductImages.Where(pi=>pi.IsPrimary==true))
-                .ToListAsync(); 
+                .Include(p=>p.ProductTags)
+                .ThenInclude(pt=>pt.Tag)
+                .ToListAsync();
 
-            return View(products);
+            PaginateVM<Product> pagvm = new PaginateVM<Product>
+            {
+                Items = products,
+                TotalPage= Math.Ceiling((double)count / 3),
+                CurrentPage=page,
+            };
+
+            return View(pagvm);
         }
-        [Authorize(Roles = "Admin,Moderator")]
+        //[Authorize(Roles = "Admin,Moderator")]
 
         public async Task<IActionResult> Create()
         {
@@ -238,7 +251,7 @@ namespace MVC_Project.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));  
         }
 
-        [Authorize(Roles = "Admin,Moderator")]
+        //[Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult>Update(int id)
         {
             if (id <= 0) return BadRequest();
@@ -501,7 +514,7 @@ namespace MVC_Project.Areas.Admin.Controllers
 
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete (int id)
         {
             if (id <= 0) return BadRequest();

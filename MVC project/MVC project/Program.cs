@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.DAL;
 using MVC_Project.Interfaces;
+using MVC_Project.Middlewares;
 using MVC_Project.Models;
 using MVC_Project.Services;
 
@@ -28,6 +29,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.Lockout.MaxFailedAccessAttempts = 3;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);  
     options.Lockout.AllowedForNewUsers = true;
+
+    options.SignIn.RequireConfirmedEmail = true;    
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 
@@ -37,12 +40,13 @@ builder.Services.AddScoped<LayoutService>();
 builder.Services.AddScoped<IEmailService,EmailService>();
 
 var app = builder.Build();
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization(); 
-
+app.UseSession();
 app.UseStaticFiles();
-app.UseRouting();
+app.UseMiddleware<GlobalExceptionHandleMiddleware>();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(

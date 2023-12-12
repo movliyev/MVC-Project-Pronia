@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Areas.Admin.ViewModels;
 using MVC_Project.Areas.Admin.ViewModels;
 using MVC_Project.DAL;
 using MVC_Project.Models;
+using MVC_Project.ViewModels;
 
 namespace MVC_Project.Areas.Admin.Controllers
 {
@@ -17,10 +19,21 @@ namespace MVC_Project.Areas.Admin.Controllers
             _context = context;
         }
 
-        public async Task <IActionResult> Index()
+        public async Task <IActionResult> Index(int page = 1)
         {
-           List<Category> categories =await _context.Categorys.Include(c=>c.Products).ToListAsync();          
-                return View(categories);
+            if (page < 1) return BadRequest();
+
+            int count = await _context.Categorys.CountAsync();
+            List<Category> categories =await _context.Categorys.Skip((page - 1) * 3).Take(3)
+                .Include(c=>c.Products).ToListAsync();
+            PaginateVM<Category> pagvm = new PaginateVM<Category>
+            {
+                Items = categories,
+                TotalPage = Math.Ceiling((double)count / 3),
+                CurrentPage = page,
+            };
+
+            return View(pagvm);
         }
         public IActionResult Create()
         {

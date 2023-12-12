@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.DAL;
 using MVC_Project.Models;
+using MVC_Project.Utilities.Exceptions;
 using MVC_Project.ViewModels;
 
 namespace MVC_Project.Controllers
@@ -20,7 +21,7 @@ namespace MVC_Project.Controllers
         //}
         public async Task <IActionResult> Detail(int id)
         {
-            if (id == 0) return BadRequest();
+            if (id == 0) throw new WrongRequestException("Sorgu yanlisdir");
 
             List<Product> products = _context.Products.Include(p => p.ProductImages).ToList();
             Product product= await _context.Products
@@ -30,7 +31,7 @@ namespace MVC_Project.Controllers
                 .Include(p => p.ProductColors).ThenInclude(x => x.Color)
                 .Include(p => p.ProductSizes).ThenInclude(x => x.Size)
                 .FirstOrDefaultAsync(x => x.Id == id);
-            if (product == null) return NotFound();
+            if (product == null) throw new NotFoundException("Mehsul tapilmadi");
             List<Product> releatedProducts = _context.Products.Include(p => p.ProductImages)
                 .Include(p => p.Category)
                 .Where(p => p.CategoryId == product.CategoryId && p.Id != id).ToList();

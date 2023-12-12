@@ -1,8 +1,6 @@
-﻿@using MVC_Project.Models;
-@using MVC_Project.ViewModels;
-@model List<Category>
+﻿@model PaginateVM<Category>
 @{
-    int count = 0;
+    int count = (Model.CurrentPage - 1) * 3;
 }
 <div class="main-panel">
         <div class="content-wrapper">
@@ -24,7 +22,7 @@
                             Name
                           </th>
                           <th>
-                            Products Count
+                            categorys Count
                           </th>
                           <th>
                            
@@ -34,7 +32,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                       @foreach (Category item in Model)
+                       @foreach (Category item in Model.Items)
                        {
                                         count++;
                                         <tr>
@@ -60,6 +58,17 @@
                       </tbody>
                     </table>
                   </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item @(Model.CurrentPage<=1?"disabled":"")"><a class="page-link" asp-route-page="@(Model.CurrentPage-1)" asp-action="index" asp-controller="category">Previous</a></li>
+                                @for (int i = 0; i < Model.TotalPage; i++)
+                                {
+                                    <li class="page-item @(Model.CurrentPage - 1 == i? "disabled":"")"><a class="page-link" asp-route-page="@(i+1)" asp-action="index" asp-controller="category">@(i + 1)</a></li>
+                                }
+
+                                <li class="page-item @(Model.TotalPage<=Model.CurrentPage?"disabled":"")"><a class="page-link" asp-route-page="@(Model.CurrentPage+1)" asp-action="index" asp-controller="category">Next</a></li>
+                            </ul>
+                        </nav>
                 </div>
               </div>
             </div>

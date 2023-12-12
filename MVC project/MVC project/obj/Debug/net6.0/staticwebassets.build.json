@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ydkvJyONQyFCMph852lUDnAKJt1EwL6DRBJTZK7BLy4=",
+  "Hash": "88fjo7Klsrhb4VBC380ycIN4em76Yjdf7cam1lrnMm4=",
   "Source": "MVC Project",
   "BasePath": "_content/MVC Project",
   "Mode": "Default",
@@ -4894,6 +4894,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\main.js"
+    },
+    {
+      "Identity": "C:\\Users\\helpdesk_connect\\Desktop\\MVC-Project-Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\js\\mn.js",
+      "SourceId": "MVC Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\helpdesk_connect\\Desktop\\MVC-Project-Pronia\\MVC project\\MVC Project\\wwwroot\\",
+      "BasePath": "_content/MVC Project",
+      "RelativePath": "assets/js/mn.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\mn.js"
     },
     {
       "Identity": "C:\\Users\\helpdesk_connect\\Desktop\\MVC-Project-Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\js\\plugins.min.js",

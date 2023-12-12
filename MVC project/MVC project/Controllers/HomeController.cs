@@ -23,7 +23,7 @@ namespace MVC_Project.Controllers
         {
 
 
-          
+            
            
             List<Slide> slides= await _context.Slides.OrderBy(s => s.Order).Take(3).ToListAsync();
             List<Product> products = _context.Products.Include(p=>p.ProductImages.Where(p=>p.IsPrimary!=null) ).ToList();
@@ -42,6 +42,10 @@ namespace MVC_Project.Controllers
         public IActionResult About()
         {
             return View();
+        }
+        public IActionResult ErrorPage(string error="Xeta bash verdi")
+        {
+            return View(model:error);
         }
     }
 }

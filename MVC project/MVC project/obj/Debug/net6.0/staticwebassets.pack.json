@@ -1149,6 +1149,10 @@
       "PackagePath": "staticwebassets\\assets\\js\\main.js"
     },
     {
+      "Id": "C:\\Users\\helpdesk_connect\\Desktop\\MVC-Project-Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\js\\mn.js",
+      "PackagePath": "staticwebassets\\assets\\js\\mn.js"
+    },
+    {
       "Id": "C:\\Users\\helpdesk_connect\\Desktop\\MVC-Project-Pronia\\MVC project\\MVC Project\\wwwroot\\assets\\js\\plugins.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\plugins.min.js"
     },

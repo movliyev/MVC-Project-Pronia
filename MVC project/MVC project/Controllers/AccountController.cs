@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MVC_Project.DAL;
+using MVC_Project.Interfaces;
 using MVC_Project.Models;
 using MVC_Project.Utilities.Enums;
 using MVC_Project.ViewModels;
@@ -16,12 +17,14 @@ namespace MVC_Project.Controllers
         private readonly UserManager<AppUser> _useManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IEmailService _emailService;
 
-        public AccountController(UserManager<AppUser>useManager, SignInManager<AppUser> signInManager,RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<AppUser>useManager, SignInManager<AppUser> signInManager,RoleManager<IdentityRole> roleManager,IEmailService emailService)
         {
             _useManager = useManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _emailService = emailService;
         }
         public IActionResult Register()
         {
@@ -64,11 +67,36 @@ namespace MVC_Project.Controllers
             }
 
             await _useManager.AddToRoleAsync(user, UseRole.Member.ToString());
-            await _signInManager.SignInAsync(user, false);
-            return RedirectToAction("Index","Home");  
+
+            var token=await _useManager.GenerateEmailConfirmationTokenAsync(user);  
+
+            var confirmationlink = Url.Action(nameof(ConfirmEmail), "Account", new {token,Email=user.Email},Request.Scheme);
+
+            await _emailService.SendEmailAsync(user.Email, "Email Confirmation", confirmationlink);
+            //await _signInManager.SignInAsync(user, false);
+
+
+            return RedirectToAction(nameof(SuccesRegistered),"Account");  
         }
 
-        public IActionResult Login()
+        public async Task<IActionResult> ConfirmEmail(string token,string email)
+        {
+            AppUser user=await _useManager.FindByEmailAsync(email);
+            if (user == null) return NotFound();
+            var result=await _useManager.ConfirmEmailAsync(user,token);
+            if (!result.Succeeded)
+            {
+                return BadRequest();
+
+            }
+            _signInManager.SignInAsync(user, false);
+            return View();
+        }
+        public IActionResult SuccesRegistered()
+        {
+            return View();
+        }
+        public  IActionResult Login()
         {
             return View();
         }
@@ -94,6 +122,11 @@ namespace MVC_Project.Controllers
                 ModelState.AddModelError(String.Empty, "Login olmur birazdan birde sinayin");
                 return View();
 
+            }
+            if (!user.EmailConfirmed)
+            {
+                ModelState.AddModelError(String.Empty, "Emaili tesdiq edildi");
+                return View();
             }
             if (!result.Succeeded)
             {
